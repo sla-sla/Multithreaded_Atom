@@ -16,7 +16,7 @@ public class Main {
 
             Runnable logic1 = () -> {            //Поток 1
                 for (String str : texts) {
-                    if (isPalindrome(str)) {
+                    if (isPalindrome(str) & !(isSameChar(str))) { // только палиндром, без одинаковых символов во всей строке
                         switch (str.length()) {
                             case 3:
                                 countFor3.getAndIncrement();
