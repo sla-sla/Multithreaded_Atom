@@ -14,16 +14,17 @@ public class Main {
         }
         List<Thread> threads = new ArrayList<>();
 
-        for (String str : texts) {
-            Runnable logic1 = () -> {
-                if (isPalindrome(str)) {
-                    switch (str.length()) {
-                        case 3:
-                            countFor3.getAndIncrement();
-                        case 4:
-                            countFor4.getAndIncrement();
-                        case 5:
-                            countFor5.getAndIncrement();
+            Runnable logic1 = () -> {            //Поток 1
+                for (String str : texts) {
+                    if (isPalindrome(str)) {
+                        switch (str.length()) {
+                            case 3:
+                                countFor3.getAndIncrement();
+                            case 4:
+                                countFor4.getAndIncrement();
+                            case 5:
+                                countFor5.getAndIncrement();
+                        }
                     }
                 }
             };
@@ -31,18 +32,20 @@ public class Main {
             thread1.start();
             threads.add(thread1);
 
-            Runnable logic2 = () -> {
-                if (isSameChar(str)) {
-                    switch (str.length()) {
-                        case 3:
-                            countFor3.getAndIncrement();
-                            break;
-                        case 4:
-                            countFor4.getAndIncrement();
-                            break;
-                        case 5:
-                            countFor5.getAndIncrement();
-                            break;
+            Runnable logic2 = () -> {           //Поток 2
+                for (String str : texts) {
+                    if (isSameChar(str)) {
+                        switch (str.length()) {
+                            case 3:
+                                countFor3.getAndIncrement();
+                                break;
+                            case 4:
+                                countFor4.getAndIncrement();
+                                break;
+                            case 5:
+                                countFor5.getAndIncrement();
+                                break;
+                        }
                     }
                 }
             };
@@ -50,25 +53,27 @@ public class Main {
             thread2.start();
             threads.add(thread2);
 
-            Runnable logic3 = () -> {
-                if (isSort(str)) {
-                    switch (str.length()) {
-                        case 3:
-                            countFor3.getAndIncrement();
-                            break;
-                        case 4:
-                            countFor4.getAndIncrement();
-                            break;
-                        case 5:
-                            countFor5.getAndIncrement();
-                            break;
+            Runnable logic3 = () -> {           //Поток 3
+                for (String str : texts) {
+                    if (isSort(str)) {
+                        switch (str.length()) {
+                            case 3:
+                                countFor3.getAndIncrement();
+                                break;
+                            case 4:
+                                countFor4.getAndIncrement();
+                                break;
+                            case 5:
+                                countFor5.getAndIncrement();
+                                break;
+                        }
                     }
                 }
             };
             Thread thread3 = new Thread(logic3);
             thread3.start();
             threads.add(thread3);
-        }
+
 
 
         for (Thread thread : threads) {  // Ожидание завершения всех потоков
